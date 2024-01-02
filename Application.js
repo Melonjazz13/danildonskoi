@@ -26,5 +26,7 @@ let app = {
     mainWidth: 0,
     mainHeight: 0,
     canvasWidth: 0,
-    canvasHeight: 0
+    canvasHeight: 0,
+
+    screenManager: {}
 };	

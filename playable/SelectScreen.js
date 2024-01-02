@@ -54,7 +54,7 @@ class SelectScreen extends Screen {
     }
 
     initChoiceCards() {
-        let filterOutline = new PIXI.filters.OutlineFilter( 4, 0xffffff);
+        let filterOutline = new PIXI.filters.OutlineFilter( 3, 0xffffff);
         filterOutline.padding = 10;
 
         this.initContours();  
