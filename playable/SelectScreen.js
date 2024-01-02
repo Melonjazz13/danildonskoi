@@ -122,7 +122,7 @@ class SelectScreen extends Screen {
 
         this.playerPresentation = new PIXI.Container();
         this.display.addChild( this.playerPresentation );
-        this.playerPresentation.filters = [filterOutline]; 
+        //this.playerPresentation.filters = [filterOutline]; 
 
         this.firstPlayerPresentation = new PIXI.Sprite( assets.textures.pixi.kenny );
         this.firstPlayerPresentation.anchor.set( 0.5, 1 );
@@ -138,7 +138,7 @@ class SelectScreen extends Screen {
 
         this.enemyPresentation = new PIXI.Container();
         this.display.addChild( this.enemyPresentation );
-        this.enemyPresentation.filters = [filterOutline];
+        //this.enemyPresentation.filters = [filterOutline];
 
         this.firstEnemyPresentation = new PIXI.Sprite( assets.textures.pixi.isiah );
         this.firstEnemyPresentation.anchor.set( 0.5, 1 );
