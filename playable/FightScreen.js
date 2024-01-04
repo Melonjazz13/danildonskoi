@@ -116,11 +116,11 @@ class FightScreen extends Screen {
         this.playerSpine.state.addAnimation(1, "kick", false, 1);
         this.playerSpine.state.addAnimation(1, "slap", false, 1);        
         this.playerSpine.state.addAnimation(1, "figthidle", true, 0);
-        this.playerSpine.state.addAnimation(2, "win", false, 6);
+        this.playerSpine.state.addAnimation(2, "win", false, 5);
         this.playerSpine.state.tracks[2].listener = {
             complete: () => {               
                 this.winCaption.visible = true;
-                gsap.to( this.winCaption.scale, 0.4, {x: 2.1, y: 2.1, repeat: -1, yoyo: true, ease: 'sine.inOut'} );
+                gsap.from( this.winCaption.scale, 0.4, {x: 0.8, y: 0.8, repeat: -1, yoyo: true, ease: 'sine.inOut'} );
 
                 gsap.delayedCall( 2, () => {
                     app.screenManager.set( FinishScreen, this.selectedWrestless, true );             
@@ -194,7 +194,7 @@ class FightScreen extends Screen {
         filterOutline.padding = 10;
 
         this.winCaption = new PIXI.Container();
-        this.winCaption.scale.set( 1.8, 1.8 );    
+        this.winCaption.scale.set( 1.3, 1.3 );    
         this.display.addChild( this.winCaption );
         this.winCaption.visible = false;;      
 
