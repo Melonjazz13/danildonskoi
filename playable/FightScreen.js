@@ -116,7 +116,8 @@ class FightScreen extends Screen {
         this.playerSpine.state.addAnimation(1, "kick", false, 1);
         this.playerSpine.state.addAnimation(1, "slap", false, 1);        
         this.playerSpine.state.addAnimation(1, "figthidle", true, 0);
-        this.playerSpine.state.addAnimation(2, "win", false, 5);
+        this.playerSpine.state.addAnimation(1, "body_slam", false, 0);
+        this.playerSpine.state.addAnimation(2, "win", false, 8);
         this.playerSpine.state.tracks[2].listener = {
             complete: () => {               
                 this.winCaption.visible = true;
@@ -134,6 +135,9 @@ class FightScreen extends Screen {
         this.enemySpine.state.addAnimation(1, "knockeddown_out", false, 0);
         this.enemySpine.state.addAnimation(1, "figthidle", false, 0);
         this.enemySpine.state.addAnimation(1, "defeat_f", false, -1);
+        this.enemySpine.state.addAnimation(1, "stand_up_f", false, 1);
+        this.enemySpine.state.addAnimation(1, "body_slam_damage", false, 1);
+
     }
 
     initFightPresentation() {        
