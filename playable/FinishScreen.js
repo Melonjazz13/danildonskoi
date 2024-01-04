@@ -99,7 +99,9 @@ class FinishScreen extends Screen {
             case 'Kenny':
                 this.playerSpine.skeleton.setSkinByName('Kenny_Omega');
                 this.playerSpine.visible = true;
-                this.playerSpine.state.addAnimation(1, 'win', false, 0);        
+                this.playerSpine.state.addAnimation(0, 'idle', true);
+                this.playerSpine.state.addAnimation(1, 'win', false, 0);                       
+                this.playerSpine.state.addAnimation(2, 'idle', true);                       
                 gsap.from( this.playerSpine, 0.5, {alpha: 0} );
                 this.fireAnim.visible = true;
                 this.fireAnim.play();                
@@ -109,13 +111,14 @@ class FinishScreen extends Screen {
                     gsap.from( this.speechCaption, 1, {alpha: 0, ease: "back.out"});
                     gsap.from( this.speechCaption.scale, 0.7, {x:0, y:0, ease: "back.out"} );
                 } );
-                this.playerSpine.state.addAnimation(1, 'idle', true, 2); 
                 break;
 
             case 'MJF':
                 this.playerSpine.skeleton.setSkinByName('MJF');
                 this.playerSpine.visible = true;
-                this.playerSpine.state.addAnimation(1, 'win', false, 0); 
+                this.playerSpine.state.addAnimation(0, 'idle', true);
+                this.playerSpine.state.addAnimation(1, 'win', false, 0);                       
+                this.playerSpine.state.addAnimation(2, 'idle', true);    
                 gsap.from( this.playerSpine, 0.5, {alpha: 0} );
                 this.fireAnim.visible = true;
                 this.fireAnim.play();                
@@ -125,7 +128,6 @@ class FinishScreen extends Screen {
                     gsap.from( this.speechCaption, 1, {alpha: 0, ease: "back.out"});
                     gsap.from( this.speechCaption.scale, 0.7, {x:0, y:0, ease: "back.out"} );
                 } );
-                this.playerSpine.state.addAnimation(1, 'idle', true, 2);           
                 break;
         }
     }

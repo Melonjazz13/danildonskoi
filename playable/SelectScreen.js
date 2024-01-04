@@ -66,7 +66,10 @@ class SelectScreen extends Screen {
 
         let cardsBackground = new PIXI.Sprite( assets.textures.pixi.cardsBackground ); 
         cardsBackground.anchor.set( 0.5, 0.5 );
-        cardsBackground.scale.x = 0.7;
+        cardsBackground.width = 660;
+        cardsBackground.height = 480;
+
+
         this.choiceCards.addChild( cardsBackground );
                 
         this.initCaptions();
@@ -159,13 +162,19 @@ class SelectScreen extends Screen {
 
         this.fireAnimUp = createAnimSprite( assets.textures.pixi['fire'], fireSheetData, 'fire' );	
 	    this.fireAnimUp.anchor.set(0.5, 1);
-        this.fireAnimUp.scale.set(4, 4);
+        this.fireAnimUp.scale.set(1, 1);
+        this.fireAnimUp.height = 800;
+        this.fireAnimUp.width = 1500;
+
         this.fireAnimUp.visible = false;
         this.fireAnimUp.hitArea = new PIXI.Rectangle(0, 0, 0, 0);
         
         this.fireAnimDown = createAnimSprite( assets.textures.pixi['fire'], fireSheetData, 'fire' );	
 	    this.fireAnimDown.anchor.set(0.5, 1);
-        this.fireAnimDown.scale.set(4, 4);
+        this.fireAnimDown.scale.set(1, 1);
+        this.fireAnimDown.height = 800;
+        this.fireAnimDown.width = 1500;
+
         this.fireAnimDown.visible = false;
         this.fireAnimDown.hitArea = new PIXI.Rectangle(0, 0, 0, 0);
 
@@ -290,7 +299,7 @@ class SelectScreen extends Screen {
             this.background.height = downUI - upUI;
             this.background.width = this.background.height;
 
-            this.choiceCards.scale.x = 1
+            //this.choiceCards.scale.x = 1
 
             this.firstPlayerPresentation.x = 0;
             this.firstPlayerPresentation.y = -242;
@@ -322,7 +331,7 @@ class SelectScreen extends Screen {
             this.background.width = rightUI - leftUI;
             this.background.height = this.background.width;
 
-            this.choiceCards.scale.x = 0.93
+            //this.choiceCards.scale.x = 1
 
             this.firstPlayerPresentation.x = leftUI + 160;
             this.firstPlayerPresentation.y = downUI;
@@ -409,11 +418,11 @@ class SelectScreen extends Screen {
                     gsap.from( this.firstEnemyPresentation, 0.5, {alpha: 0});             
                 });
                 gsap.delayedCall( 1.8, () => {
-                    app.screenManager.set( FightScreen, this.selectedWrestless, true );             
+                    app.screenManager.set( FigthScreen, this.selectedWrestless, true );             
                 })
                 gsap.to( this.contourEnemy, 0.5, { alpha: 0 });
                 gsap.to( this.chooseEnemyCaption, 0.4, { alpha: 0 });                 
-                this.firstEnemyCard.off( 'pointertap', this.onCardTap );
+                this.firstEnemyCard.off( 'pointertap', this.onCardTap );               
                 this.secondEnemyCard.off( 'pointertap', this.onCardTap );  
                 break;
                 
@@ -432,7 +441,7 @@ class SelectScreen extends Screen {
                     gsap.from( this.secondEnemyPresentation, 0.5, {alpha: 0});             
                 });
                 gsap.delayedCall( 1.8, () => {
-                    app.screenManager.set( FightScreen, this.selectedWrestless, true );             
+                    app.screenManager.set( FigthScreen, this.selectedWrestless, true );             
                 })
                 gsap.to( this.contourEnemy, 0.5, { alpha: 0 });
                 gsap.to( this.chooseEnemyCaption, 0.4, { alpha: 0 });                 
