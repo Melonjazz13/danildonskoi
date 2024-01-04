@@ -44,7 +44,8 @@ class FinishScreen extends Screen {
         
         let speech = new PIXI.Sprite( assets.textures.pixi.speech );
         speech.anchor.set( 0.5, 1 );
-        speech.scale.set( 0.4, 0.35 );
+        speech.scale.set( 0.4, 0.4 );
+        speech.y = 15
         speech.visible = true;
 
         this.speechCaption.addChild( speechBaloon, speech );

@@ -36,13 +36,13 @@ class Tutor {
 
     }
 
-    show() {
+    show = () => {
         this.display.visible = true;
         gsap.from( this.display, 0.5, { alpha: 0 });
         this.timeline.play();
     }
 
-    hide() {        
+    hide = () => {        
         this.timeline.pause(0);
         gsap.to( this.display, 0.5, { alpha: 0, onComplete: ()=> this.display.visible = false });
     }

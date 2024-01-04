@@ -1,7 +1,7 @@
 class FightScreen extends Screen {
     display;
     background;
-    fightScene;
+    figthScene;
     reward;
     fightCaptionHorizon; 
     fightCaptionVertical;     
@@ -30,7 +30,9 @@ class FightScreen extends Screen {
         this.initSpine();
         this.initFightRing();                
         this.initReward();
-        this.initFightPresentation();      
+        this.initFightPresentation();   
+        this.initWinText(); 
+
     }
 
     initFightRing() {
@@ -38,30 +40,30 @@ class FightScreen extends Screen {
         this.background.anchor.set( 0.5, 0.5 );
         this.display.addChild( this.background );
 
-        this.fightScene = new PIXI.Container();        
-        this.display.addChild( this.fightScene );
-        this.fightScene.visible = true;             
+        this.figthScene = new PIXI.Container();        
+        this.display.addChild( this.figthScene );
+        this.figthScene.visible = true;             
         
         let fightRing = new PIXI.Sprite( assets.textures.pixi.ring ); 
         fightRing.anchor.set( 0.5, 0.5 );
 
         let ringLight = new PIXI.Sprite( assets.textures.pixi.lights ); 
         ringLight.anchor.set( 0.5, 0.5 );
-        this.fightScene.addChild( fightRing, ringLight );        
-        
-        this.playerCharacters = new PIXI.Container();
-        this.initPlayerSpine();
-        this.fightScene.addChild( this.playerCharacters );
-        this.playerCharacters.visible = false; 
+        this.figthScene.addChild( fightRing, ringLight ); 
 
         this.enemyCharacters = new PIXI.Container();
         this.initEnemySpine();
-        this.fightScene.addChild( this.enemyCharacters );
-        this.enemyCharacters.visible = false; 
+        this.figthScene.addChild( this.enemyCharacters );
+        this.enemyCharacters.visible = true;        
+        
+        this.playerCharacters = new PIXI.Container();
+        this.initPlayerSpine();
+        this.figthScene.addChild( this.playerCharacters );
+        this.playerCharacters.visible = true;         
 
         let ringRope = new PIXI.Sprite( assets.textures.pixi.rope ); 
         ringRope.anchor.set( 0.5, 0.5 );
-        this.fightScene.addChild( ringRope );
+        this.figthScene.addChild( ringRope );
     }  
 
     initSpine() {
@@ -74,27 +76,65 @@ class FightScreen extends Screen {
 
         let spineAtlasLoader = new PIXI.spine.AtlasAttachmentLoader(spineAtlas)
         let spineJsonParser = new PIXI.spine.SkeletonJson(spineAtlasLoader);
-        this.spineData = spineJsonParser.readSkeletonData(rawSkeletonData);                
+        this.spineData = spineJsonParser.readSkeletonData(rawSkeletonData);
+        //this.spineData.scale = 5   
     } 
 
     initPlayerSpine() {
         this.playerSpine = new PIXI.spine.Spine(this.spineData);
         this.playerCharacters.addChild(this.playerSpine);
-        
-        this.playerSpine.autoUpdate = true;             
-        
-        this.playerSpine.scale.set(-0.15, 0.15);
-        this.playerSpine.position.set(-140, 100);     
+        this.playerSpine.autoUpdate = true;
+        console.log(this.playerSpine.skeleton)
+
+        // this.playerSpine.skeleton.scaleX = 5
+        // this.playerSpine.skeleton.scaleY = 5
+
+        this.playerCharacters.visible = false;
+        // this.playerSpine.skeleton.setSkinByName('Kenny_Omega');
+        // this.playerSpine.state.addAnimation(0, "figthidle", true);  
+
+        this.playerSpine.scale.set(-0.16, 0.16);
+        this.playerSpine.position.set(-150, 80);
     } 
     
     initEnemySpine() {
         this.enemySpine = new PIXI.spine.Spine(this.spineData);
-        this.enemyCharacters.addChild(this.enemySpine);      
+        this.enemyCharacters.addChild(this.enemySpine);
         this.enemySpine.autoUpdate = true;
-        
-        this.enemySpine.scale.set(0.15);
-        this.enemySpine.position.set(140, 100);         
-    }  
+
+        this.enemyCharacters.visible = false;
+        // this.enemySpine.skeleton.setSkinByName('Isiah_Kassidy');
+        // this.enemySpine.state.addAnimation(0, "figthidle", true);
+
+        this.enemySpine.scale.set(0.16);
+        this.enemySpine.position.set(90, 100); 
+    }
+
+    initScenario() {
+        this.playerSpine.state.addAnimation(1, "punch", false, 0);
+        this.playerSpine.state.addAnimation(1, "punch", false, 1);
+        this.playerSpine.state.addAnimation(1, "kick", false, 1);
+        this.playerSpine.state.addAnimation(1, "slap", false, 1);        
+        this.playerSpine.state.addAnimation(1, "figthidle", true, 0);
+        this.playerSpine.state.addAnimation(2, "win", false, 6);
+        this.playerSpine.state.tracks[2].listener = {
+            complete: () => {               
+                this.winCaption.visible = true;
+                gsap.to( this.winCaption.scale, 0.4, {x: 2.1, y: 2.1, repeat: -1, yoyo: true, ease: 'sine.inOut'} );
+
+                gsap.delayedCall( 2, () => {
+                    app.screenManager.set( FinishScreen, this.selectedWrestless, true );             
+                });
+        }};
+
+        this.enemySpine.state.addAnimation(1, "block_arm", false, 0);
+        this.enemySpine.state.addAnimation(1, "block_arm", false, 1);
+        this.enemySpine.state.addAnimation(1, "figthidle", true, 0);
+        this.enemySpine.state.addAnimation(1, "knockeddown_in", false, -1);
+        this.enemySpine.state.addAnimation(1, "knockeddown_out", false, 0);
+        this.enemySpine.state.addAnimation(1, "figthidle", false, 0);
+        this.enemySpine.state.addAnimation(1, "defeat_f", false, -1);
+    }
 
     initFightPresentation() {        
         let filterOutline = new PIXI.filters.OutlineFilter( 3, 0xffffff);
@@ -102,14 +142,14 @@ class FightScreen extends Screen {
 
         this.fightCaptionHorizon = new PIXI.Container();
         this.fightCaptionHorizon.scale.set( 1.2, 1.2 );    
-        this.fightScene.addChild( this.fightCaptionHorizon );
+        this.figthScene.addChild( this.fightCaptionHorizon );
         this.fightCaptionHorizon.visible = false;
         this.fightCaptionHorizon.x = 70;
         this.fightCaptionHorizon.y = 160;
         
         this.fightCaptionVertical = new PIXI.Container();
         this.fightCaptionVertical.scale.set( 1.5, 1.5 );    
-        this.fightScene.addChild( this.fightCaptionVertical );
+        this.figthScene.addChild( this.fightCaptionVertical );
         this.fightCaptionVertical.visible = false;
         this.fightCaptionVertical.x = 0;
         this.fightCaptionVertical.y = -600;        
@@ -149,20 +189,31 @@ class FightScreen extends Screen {
         this.fightCaptionVertical.addChild(  fightTextVer1, fightTextVer2, fightIconVer );
     } 
 
+    initWinText() {
+        let filterOutline = new PIXI.filters.OutlineFilter( 3, 0xffffff);
+        filterOutline.padding = 10;
+
+        this.winCaption = new PIXI.Container();
+        this.winCaption.scale.set( 1.8, 1.8 );    
+        this.display.addChild( this.winCaption );
+        this.winCaption.visible = false;;      
+
+        let winText = new PIXI.Sprite( assets.textures.pixi.wonCaption ); 
+        winText.anchor.set( 0.5, 0.5 );
+        winText.x = 0;
+        winText.filters = [filterOutline];
+
+        this.winCaption.addChild( winText );
+    }
+
     enter( object ) {
         //console.log('enter from fight screen');
-        this.fightScene.visible = true;
+        this.figthScene.visible = true;
         gsap.from( this.fightPresentation, 0.5, {alpha: 0} );
         gsap.from( this.fightCaptionHorizon.scale, 0.5, {x:0, y:0, ease: "back.out"} );
         gsap.from( this.fightCaptionVertical.scale, 0.5, {x:0, y:0, ease: "back.out"} );
         
         this.showFightPresentation();
-        // gsap.delayedCall( 3, () => {
-        //     this.showReward();
-        // } );
-        gsap.delayedCall( 5, () => {           
-            app.screenManager.set( FinishScreen, this.selectedWrestless, true );
-        } )
 
         switch (object.playerName ) {
             case 'Kenny':
@@ -204,8 +255,8 @@ class FightScreen extends Screen {
             this.background.height = downUI - upUI;
             this.background.width = 1280 * this.background.height/1766;
 
-            this.fightScene.height = downUI - upUI;
-            this.fightScene.width = 1280 * this.fightScene.height/1766;
+            this.figthScene.height = downUI - upUI;
+            this.figthScene.width = 1280 * this.figthScene.height/1766;
 
             this.reward.height = 80;
             this.reward.width = 256 * this.reward.height/257;
@@ -213,18 +264,22 @@ class FightScreen extends Screen {
             this.fightCaptionHorizon.visible = false;
             this.fightCaptionVertical.visible = true;
 
+            this.winCaption.y = -450; 
+
         } else {            
             this.background.width = rightUI - leftUI;
             this.background.height = 1766 * this.background.width/1280;
 
-            this.fightScene.width = rightUI - leftUI;
-            this.fightScene.height = 1766 * this.fightScene.width/1280;
+            this.figthScene.width = rightUI - leftUI;
+            this.figthScene.height = 1766 * this.figthScene.width/1280;
 
             this.reward.height = 80;
             this.reward.width = 256 * this.reward.height/257;
 
             this.fightCaptionVertical.visible = false;
             this.fightCaptionHorizon.visible = true;
+
+            this.winCaption.y = -120;
         }
     }
     
@@ -232,7 +287,7 @@ class FightScreen extends Screen {
         this.reward = new PIXI.Sprite( assets.textures.pixi.cash ); 
         this.reward.anchor.set( 0.5, 0.5 );
         this.reward.visible = false;
-        this.fightScene.addChild( this.reward );
+        this.figthScene.addChild( this.reward );
         this.reward.x = 0;
         this.reward.y = 0;
         
@@ -240,7 +295,7 @@ class FightScreen extends Screen {
         this.rewardText.anchor.set( 0.5, 0 );
         this.rewardText.scale.set( 0.7, 0.7 );
         this.rewardText.visible = false;
-        this.fightScene.addChild( this.rewardText );
+        this.figthScene.addChild( this.rewardText );
         this.rewardText.x = 0;
         this.rewardText.y = this.playerCharacters.y + 70;
         
@@ -265,12 +320,15 @@ class FightScreen extends Screen {
     hideReward() {        
         this.timeline1.pause(0);
         this.timeline2.pause(0);
-        gsap.to( this.reward, 0.5, { alpha: 0, onComplete: ()=> this.display.visible = false });
+        gsap.to( this.reward, 0.5, { alpha: 0 });
     }
 
     showFightPresentation() {
-        gsap.from( this.fightCaptionHorizon, 0.65, {alpha: 0, repeat: 5, yoyo: true, ease: "quad.inOut"} );
-        gsap.from( this.fightCaptionVertical, 0.65, {alpha: 0, repeat: 5, yoyo: true, ease: "quad.inOut"} );
+        gsap.from( this.fightCaptionHorizon, 0.65, {alpha: 0, repeat: 5, yoyo: true, ease: "quad.inOut", onComplete: ()=>{
+            this.initScenario();
+        }
+    });
+        gsap.from( this.fightCaptionVertical, 0.65, {alpha: 0, repeat: 5, yoyo: true, ease: "quad.inOut"});
     }    
 
 }

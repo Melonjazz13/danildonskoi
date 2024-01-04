@@ -50,7 +50,9 @@ class SelectScreen extends Screen {
         this.background.anchor.set( 0.5, 0.5 );
 
         this.initChoiceCards();     
-        this.initTutor();             
+        this.initTutor(); 
+        
+        setTimeout( this.tutorPlayer.show, 1500 );
     }
 
     initChoiceCards() {
@@ -363,13 +365,15 @@ class SelectScreen extends Screen {
     
     onCardTap = ( event ) => {
         switch( event.currentTarget.name ) {
-            case 'Kenny':                
+            case 'Kenny':    
+                this.tutorPlayer.hide();
+                setTimeout( this.tutorEnemy.show, 1500 );            
                 this.selectedWrestless.playerName = event.currentTarget.name;                
                 gsap.to( this.firstPlayerCard.scale, 0.2, {x: 0.8, y: 0.8, repeat: 1, yoyo: true, ease: 'sine.inOut', onComplete: () => {
                     this.firstPlayerCard.visible = false;
                     this.secondPlayerCard.visible = false;                                    
                     this.showEnemyChoice();
-                }});
+                }});                
                 this.fireAnimUp.visible = true;
                 this.fireAnimUp.play();
                 gsap.from( this.fireAnimUp, 0.5, {alpha: 0, repeat: 1, yoyo: true});                    
@@ -383,7 +387,9 @@ class SelectScreen extends Screen {
                 this.secondPlayerCard.off( 'pointertap', this.onCardTap );
                 break;
 
-            case 'MJF':                
+            case 'MJF':
+                this.tutorPlayer.hide();
+                setTimeout( this.tutorEnemy.show, 1500 );                 
                 this.selectedWrestless.playerName = event.currentTarget.name;                
                 gsap.to( this.secondPlayerCard.scale, 0.2, {x: 0.8, y: 0.8, repeat: 1, yoyo: true, ease: 'sine.inOut', onComplete: () => {
                     this.firstPlayerCard.visible = false;
@@ -403,7 +409,8 @@ class SelectScreen extends Screen {
                 this.secondPlayerCard.off( 'pointertap', this.onCardTap );                 
                 break;
 
-            case 'Isiah':                
+            case 'Isiah': 
+                this.tutorEnemy.hide();               
                 this.selectedWrestless.enemyName = event.currentTarget.name;
                 gsap.to( this.firstEnemyCard.scale, 0.2, {x: 0.8, y: 0.8, repeat: 1, yoyo: true, ease: 'sine.inOut', onComplete: () => {
                     this.firstEnemyCard.visible = false;
@@ -418,7 +425,7 @@ class SelectScreen extends Screen {
                     gsap.from( this.firstEnemyPresentation, 0.5, {alpha: 0});             
                 });
                 gsap.delayedCall( 1.8, () => {
-                    app.screenManager.set( FigthScreen, this.selectedWrestless, true );             
+                    app.screenManager.set( FightScreen, this.selectedWrestless, true );             
                 })
                 gsap.to( this.contourEnemy, 0.5, { alpha: 0 });
                 gsap.to( this.chooseEnemyCaption, 0.4, { alpha: 0 });                 
@@ -427,6 +434,7 @@ class SelectScreen extends Screen {
                 break;
                 
             case 'Trent':
+                this.tutorEnemy.hide();  
                 this.selectedWrestless.enemyName = event.currentTarget.name;
                 gsap.to( this.secondEnemyCard.scale, 0.2, {x: 0.8, y: 0.8, repeat: 1, yoyo: true, ease: 'sine.inOut', onComplete: () => {
                     this.firstEnemyCard.visible = false;
@@ -441,7 +449,7 @@ class SelectScreen extends Screen {
                     gsap.from( this.secondEnemyPresentation, 0.5, {alpha: 0});             
                 });
                 gsap.delayedCall( 1.8, () => {
-                    app.screenManager.set( FigthScreen, this.selectedWrestless, true );             
+                    app.screenManager.set( FightScreen, this.selectedWrestless, true );             
                 })
                 gsap.to( this.contourEnemy, 0.5, { alpha: 0 });
                 gsap.to( this.chooseEnemyCaption, 0.4, { alpha: 0 });                 

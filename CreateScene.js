@@ -9,7 +9,7 @@ function createScene() {
 	
 	app.screenManager = new ScreenManager(
 		new SelectScreen(),
-		new FigthScreen(),
+		new FightScreen(),
 		new FinishScreen(),
 	); 
 
