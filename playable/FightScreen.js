@@ -52,11 +52,13 @@ class FightScreen extends Screen {
         this.figthScene.addChild( fightRing, ringLight ); 
 
         this.enemyCharacters = new PIXI.Container();
+        this.enemyCharacters.scale.set(0.155);
         this.initEnemySpine();
         this.figthScene.addChild( this.enemyCharacters );
         this.enemyCharacters.visible = true;        
         
         this.playerCharacters = new PIXI.Container();
+        this.playerCharacters.scale.set(0.155);
         this.initPlayerSpine();
         this.figthScene.addChild( this.playerCharacters );
         this.playerCharacters.visible = true;         
@@ -77,51 +79,67 @@ class FightScreen extends Screen {
         let spineAtlasLoader = new PIXI.spine.AtlasAttachmentLoader(spineAtlas)
         let spineJsonParser = new PIXI.spine.SkeletonJson(spineAtlasLoader);
         this.spineData = spineJsonParser.readSkeletonData(rawSkeletonData);
-        //this.spineData.scale = 5   
+        
+        this.playerSpine = new PIXI.spine.Spine(this.spineData);
+        this.playerSpine.autoUpdate = true;
+        //this.playerSpine.skeleton.scaleX = 1;
+        //this.playerSpine.skeleton.scaleY = 1;
+
+
+        this.enemySpine = new PIXI.spine.Spine(this.spineData);
+        this.enemySpine.autoUpdate = true;
     } 
 
-    initPlayerSpine() {
-        this.playerSpine = new PIXI.spine.Spine(this.spineData);
+    initPlayerSpine() {        
         this.playerCharacters.addChild(this.playerSpine);
-        this.playerSpine.autoUpdate = true;
-        console.log(this.playerSpine.skeleton)
-
-        // this.playerSpine.skeleton.scaleX = 5
-        // this.playerSpine.skeleton.scaleY = 5
 
         this.playerCharacters.visible = false;
         // this.playerSpine.skeleton.setSkinByName('Kenny_Omega');
         // this.playerSpine.state.addAnimation(0, "figthidle", true);  
 
-        this.playerSpine.scale.set(-0.16, 0.16);
-        this.playerSpine.position.set(-150, 80);
+        this.playerSpine.scale.set(-1, 1);
+        this.playerSpine.position.set(-800, 450);
     } 
     
-    initEnemySpine() {
-        this.enemySpine = new PIXI.spine.Spine(this.spineData);
-        this.enemyCharacters.addChild(this.enemySpine);
-        this.enemySpine.autoUpdate = true;
+    initEnemySpine() {        
+        this.enemyCharacters.addChild(this.enemySpine);        
 
         this.enemyCharacters.visible = false;
         // this.enemySpine.skeleton.setSkinByName('Isiah_Kassidy');
         // this.enemySpine.state.addAnimation(0, "figthidle", true);
 
-        this.enemySpine.scale.set(0.16);
-        this.enemySpine.position.set(90, 100); 
+        this.enemySpine.position.set(550, 650); 
     }
 
     initScenario() {
         this.playerSpine.state.addAnimation(1, "punch", false, 0);
+        gsap.delayedCall( 0.3, () => {
+            playSound( 'grunt', false, 0.5 );
+
+        } ); 
         this.playerSpine.state.addAnimation(1, "punch", false, 1);
+        gsap.delayedCall( 1.2, () => {
+            playSound( 'grunt', false, 0.5 );
+
+        } ); 
         this.playerSpine.state.addAnimation(1, "kick", false, 1);
-        this.playerSpine.state.addAnimation(1, "slap", false, 1);        
+        gsap.delayedCall( 2.2, () => {
+            playSound( 'damage', false, 0.5 );
+
+        } );         
+        this.playerSpine.state.addAnimation(1, "slap", false, 1);
+        gsap.delayedCall( 4, () => {
+            playSound( 'damage', false, 0.5 );
+
+        } );         
         this.playerSpine.state.addAnimation(1, "figthidle", true, 0);
-        this.playerSpine.state.addAnimation(1, "body_slam", false, 0);
+        this.playerSpine.state.addAnimation(1, "body_slam", false, 0);        
         this.playerSpine.state.addAnimation(2, "win", false, 8);
         this.playerSpine.state.tracks[2].listener = {
-            complete: () => {               
+            complete: () => {
+                playSound( 'peoplesWin', false, 0.6 );               
                 this.winCaption.visible = true;
-                gsap.from( this.winCaption.scale, 0.4, {x: 0.8, y: 0.8, repeat: -1, yoyo: true, ease: 'sine.inOut'} );
+                gsap.from( this.winCaption.scale, 0.4, {x: 0.7, y: 0.7, repeat: -1, yoyo: true, ease: 'sine.inOut'} );
 
                 gsap.delayedCall( 2, () => {
                     app.screenManager.set( FinishScreen, this.selectedWrestless, true );             
@@ -137,7 +155,10 @@ class FightScreen extends Screen {
         this.enemySpine.state.addAnimation(1, "defeat_f", false, -1);
         this.enemySpine.state.addAnimation(1, "stand_up_f", false, 1);
         this.enemySpine.state.addAnimation(1, "body_slam_damage", false, 1);
+        gsap.delayedCall( 7.1, () => {
+            playSound( 'whScream', false, 0.5 );
 
+        } );       
     }
 
     initFightPresentation() {        
@@ -198,7 +219,7 @@ class FightScreen extends Screen {
         filterOutline.padding = 10;
 
         this.winCaption = new PIXI.Container();
-        this.winCaption.scale.set( 1.3, 1.3 );    
+        this.winCaption.scale.set( 1.2, 1.2 );    
         this.display.addChild( this.winCaption );
         this.winCaption.visible = false;;      
 
@@ -328,6 +349,7 @@ class FightScreen extends Screen {
     }
 
     showFightPresentation() {
+        playSound( 'countdown', false, 0.5 );
         gsap.from( this.fightCaptionHorizon, 0.65, {alpha: 0, repeat: 5, yoyo: true, ease: "quad.inOut", onComplete: ()=>{
             this.initScenario();
         }

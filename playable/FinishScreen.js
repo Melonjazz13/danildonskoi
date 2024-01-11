@@ -77,20 +77,22 @@ class FinishScreen extends Screen {
 
         let spineAtlasLoader = new PIXI.spine.AtlasAttachmentLoader(spineAtlas)
         let spineJsonParser = new PIXI.spine.SkeletonJson(spineAtlasLoader);
-        this.spineData = spineJsonParser.readSkeletonData(rawSkeletonData);                
+        this.spineData = spineJsonParser.readSkeletonData(rawSkeletonData);
+        
+        this.playerSpine = new PIXI.spine.Spine(this.spineData);
+        //this.playerSpine.skeleton.scaleX = 0.35;
+        //this.playerSpine.skeleton.scaleY = 0.35;
+        this.playerSpine.autoUpdate = true;
     } 
 
-    initPlayerSpine() {
-        this.playerSpine = new PIXI.spine.Spine(this.spineData);
+    initPlayerSpine() {        
         this.mainScene.addChild(this.playerSpine);
-        this.playerSpine.visible = false;   
-
-        this.playerSpine.autoUpdate = true;             
-        //this.playerSpine.state.setAnimation(0, 'win', false);
-        this.playerSpine.scale.set(0.35);
+        // this.playerSpine.skeleton.setSkinByName('Kenny_Omega');
+        // this.playerSpine.visible = true;
         
         this.playerSpine.position.x = 0
-        this.playerSpine.position.y = 440;        
+        this.playerSpine.position.y = 440; 
+        this.playerSpine.scale.set( 0.35, 0.35)
     } 
 
     enter( object ) {
@@ -105,7 +107,9 @@ class FinishScreen extends Screen {
                 this.playerSpine.state.addAnimation(2, 'idle', true);                       
                 gsap.from( this.playerSpine, 0.5, {alpha: 0} );
                 this.fireAnim.visible = true;
-                this.fireAnim.play();                
+                this.fireAnim.play();
+                stopSound( 'bg' );  
+                playSound( 'winJingle', false, 0.5 );                
                 gsap.from( this.fireAnim, 0.5, {alpha: 0, repeat: 1, yoyo: true});       
                 gsap.delayedCall( 0.5, () => {
                     this.speechCaption.visible = true;
@@ -122,7 +126,9 @@ class FinishScreen extends Screen {
                 this.playerSpine.state.addAnimation(2, 'idle', true);    
                 gsap.from( this.playerSpine, 0.5, {alpha: 0} );
                 this.fireAnim.visible = true;
-                this.fireAnim.play();                
+                this.fireAnim.play();
+                stopSound( 'bg' );  
+                playSound( 'winJingle', false, 0.5 );               
                 gsap.from( this.fireAnim, 0.5, {alpha: 0, repeat: 1, yoyo: true});       
                 gsap.delayedCall( 0.5, () => {
                     this.speechCaption.visible = true;

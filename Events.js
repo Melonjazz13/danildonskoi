@@ -25,11 +25,8 @@ function stageDown(e) {
 			Howler.mute(!app.isSounds);	
 		}
 
-		//playSound('bg', true);
-		//fadeSound('bg', 0, 0.5, 1000);
-
-		//app.obj2d.tutor.hide();
-		// setTimeout( app.obj2d.finish.show, 500 );
+		playSound('bg', true);
+		fadeSound('bg', 0, 0.4, 1000);
 	};	
 };
 

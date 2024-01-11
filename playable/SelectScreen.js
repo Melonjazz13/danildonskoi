@@ -285,9 +285,7 @@ class SelectScreen extends Screen {
     enter() {
         //console.log('enter from game screen');
         gsap.from( this.contours, 0.9, {alpha: 0});
-        //gsap.from( this.countours.scale, 0.8, {x:0, y:0, ease: "back.out"} );
         gsap.from( this.choiceCards, 0.8, {alpha: 0} );
-        //gsap.from( this.choiceCards.scale, 0.8, {x:0, y:0, ease: "back.out"} );
         gsap.from( this.firstPlayerCard.scale, 0.8, {x:0, y:0, ease: "back.out"} );
         gsap.from( this.secondPlayerCard.scale, 0.8, {x:0, y:0, ease: "back.out"} );    
     }
@@ -368,7 +366,7 @@ class SelectScreen extends Screen {
             case 'Kenny':    
                 this.tutorPlayer.hide();
                 setTimeout( this.tutorEnemy.show, 1500 );            
-                this.selectedWrestless.playerName = event.currentTarget.name;                
+                this.selectedWrestless.playerName = event.currentTarget.name;              
                 gsap.to( this.firstPlayerCard.scale, 0.2, {x: 0.8, y: 0.8, repeat: 1, yoyo: true, ease: 'sine.inOut', onComplete: () => {
                     this.firstPlayerCard.visible = false;
                     this.secondPlayerCard.visible = false;                                    
@@ -376,6 +374,7 @@ class SelectScreen extends Screen {
                 }});                
                 this.fireAnimUp.visible = true;
                 this.fireAnimUp.play();
+                playSound( 'fire', false, 0.5 );
                 gsap.from( this.fireAnimUp, 0.5, {alpha: 0, repeat: 1, yoyo: true});                    
                 gsap.delayedCall( 0.5, () => {
                     this.firstPlayerPresentation.visible = true;
@@ -390,7 +389,7 @@ class SelectScreen extends Screen {
             case 'MJF':
                 this.tutorPlayer.hide();
                 setTimeout( this.tutorEnemy.show, 1500 );                 
-                this.selectedWrestless.playerName = event.currentTarget.name;                
+                this.selectedWrestless.playerName = event.currentTarget.name;            
                 gsap.to( this.secondPlayerCard.scale, 0.2, {x: 0.8, y: 0.8, repeat: 1, yoyo: true, ease: 'sine.inOut', onComplete: () => {
                     this.firstPlayerCard.visible = false;
                     this.secondPlayerCard.visible = false;
@@ -398,6 +397,7 @@ class SelectScreen extends Screen {
                 }});
                 this.fireAnimUp.visible = true;
                 this.fireAnimUp.play();
+                playSound( 'fire', false, 0.5 );
                 gsap.from( this.fireAnimUp, 0.5, {alpha: 0, repeat: 1, yoyo: true});                    
                 gsap.delayedCall( 0.5, () => {
                     this.secondPlayerPresentation.visible = true;
@@ -417,7 +417,8 @@ class SelectScreen extends Screen {
                     this.secondEnemyCard.visible = false;
                 }});
                 this.fireAnimDown.visible = true;
-                this.fireAnimDown.play();               
+                this.fireAnimDown.play();
+                playSound( 'fire', false, 0.5 );               
                 gsap.from( this.fireAnimDown, 0.5, {alpha: 0, repeat: 1, yoyo: true}); 
                 gsap.delayedCall( 0.5, () => {
                     this.firstEnemyPresentation.visible = true;
@@ -441,7 +442,8 @@ class SelectScreen extends Screen {
                     this.secondEnemyCard.visible = false;
                 }});
                 this.fireAnimDown.visible = true;
-                this.fireAnimDown.play();                
+                this.fireAnimDown.play(); 
+                playSound( 'fire', false, 0.5 );               
                 gsap.from( this.fireAnimDown, 0.7, {alpha: 0, repeat: 1, yoyo: true}); 
                 gsap.delayedCall( 0.5, () => {
                     this.secondEnemyPresentation.visible = true;
