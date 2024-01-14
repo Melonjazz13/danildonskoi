@@ -80,8 +80,6 @@ class FinishScreen extends Screen {
         this.spineData = spineJsonParser.readSkeletonData(rawSkeletonData);
         
         this.playerSpine = new PIXI.spine.Spine(this.spineData);
-        //this.playerSpine.skeleton.scaleX = 0.35;
-        //this.playerSpine.skeleton.scaleY = 0.35;
         this.playerSpine.autoUpdate = true;
     } 
 

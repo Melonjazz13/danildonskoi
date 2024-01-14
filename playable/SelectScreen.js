@@ -80,7 +80,7 @@ class SelectScreen extends Screen {
                 
         this.firstPlayerCard = new PIXI.Sprite( assets.textures.pixi.kennyCard );
         this.firstPlayerCard.anchor.set( 0.5, 0.5 );
-        this.firstPlayerCard.x = -this.firstPlayerCard.width/2 - this.firstPlayerCard.width/10;       
+        this.firstPlayerCard.x = -152;    
         this.firstPlayerCard.scale.set( 0.95, 0.95 );       
         this.firstPlayerCard.y = -40;        
         this.firstPlayerCard.name = 'Kenny';
@@ -89,7 +89,7 @@ class SelectScreen extends Screen {
         
         this.secondPlayerCard = new PIXI.Sprite( assets.textures.pixi.mjfCard );
         this.secondPlayerCard.anchor.set( 0.5, 0.5 );
-        this.secondPlayerCard.x = this.secondPlayerCard.width/2 + this.secondPlayerCard.width/10;
+        this.secondPlayerCard.x = 152;
         this.secondPlayerCard.y = -40;
         this.secondPlayerCard.scale.set( 0.95, 0.95 );
         this.secondPlayerCard.name = 'MJF';
@@ -100,7 +100,7 @@ class SelectScreen extends Screen {
         
         this.firstEnemyCard = new PIXI.Sprite( assets.textures.pixi.isiahCard );
         this.firstEnemyCard.anchor.set( 0.5, 0.5 );
-        this.firstEnemyCard.x = -this.firstEnemyCard.width/2 - this.firstEnemyCard.width/10;
+        this.firstEnemyCard.x = -152;
         this.firstEnemyCard.y = -40;
         this.firstEnemyCard.scale.set( 0.95, 0.95 );
         this.firstEnemyCard.name = 'Isiah';
@@ -110,7 +110,7 @@ class SelectScreen extends Screen {
         
         this.secondEnemyCard = new PIXI.Sprite( assets.textures.pixi.trentCard );
         this.secondEnemyCard.anchor.set( 0.5, 0.5 );
-        this.secondEnemyCard.x = this.secondPlayerCard.width/2 + this.secondPlayerCard.width/10;
+        this.secondEnemyCard.x = 152;
         this.secondEnemyCard.y = -40;
         this.secondEnemyCard.scale.set( 0.95, 0.95 );
         this.secondEnemyCard.name = 'Trent';
@@ -221,13 +221,13 @@ class SelectScreen extends Screen {
         this.playerCaption = new PIXI.Sprite( assets.textures.pixi.playerCaption );
         this.playerCaption.anchor.set( 0.5, 0.5 );
         this.playerCaption.scale.x = 0.7;
-        this.playerCaption.x = -165;
+        this.playerCaption.x = -152;
         this.playerCaption.visible = false;
 
         this.opponentCaption = new PIXI.Sprite( assets.textures.pixi.opponentCaption );
         this.opponentCaption.anchor.set( 0.5, 0.5 );
         this.opponentCaption.scale.x = 0.7;
-        this.opponentCaption.x = 165;
+        this.opponentCaption.x = 152;
         this.opponentCaption.visible = false;              
 
         this.choiceCards.addChild( this.playerCaption, this.opponentCaption );
@@ -236,14 +236,14 @@ class SelectScreen extends Screen {
     initChoiceBanners() {
         this.firstChoicePlayer = new PIXI.Sprite( assets.textures.pixi.kennyCard );
         this.firstChoicePlayer.anchor.set( 0.5, 0.5 );
-        this.firstChoicePlayer.x = -this.firstChoicePlayer.width/2 - this.firstChoicePlayer.width/10;        
+        this.firstChoicePlayer.x = -152;        
         this.firstChoicePlayer.y = -40;
         this.firstChoicePlayer.scale.set( 0.95, 0.95 );
         this.firstChoicePlayer.visible = false;
 
         this.secondChoicePlayer = new PIXI.Sprite( assets.textures.pixi.mjfCard );
         this.secondChoicePlayer.anchor.set( 0.5, 0.5 );
-        this.secondChoicePlayer.x = -this.secondChoicePlayer.width/2 - this.secondChoicePlayer.width/10;        
+        this.secondChoicePlayer.x = -152;        
         this.secondChoicePlayer.y = -40;
         this.secondChoicePlayer.visible = false;
         this.secondChoicePlayer.scale.set( 0.95, 0.95 );
@@ -252,14 +252,14 @@ class SelectScreen extends Screen {
 
         this.firstChoiceOpponent = new PIXI.Sprite( assets.textures.pixi.isiahCard );
         this.firstChoiceOpponent.anchor.set( 0.5, 0.5 );
-        this.firstChoiceOpponent.x = this.firstChoiceOpponent.width/2 + this.firstChoiceOpponent.width/10;        
+        this.firstChoiceOpponent.x = 152;        
         this.firstChoiceOpponent.y = -40;
         this.firstChoiceOpponent.scale.set( 0.95, 0.95 ); 
         this.firstChoiceOpponent.visible = false;
 
         this.secondChoiceOpponent = new PIXI.Sprite( assets.textures.pixi.trentCard );
         this.secondChoiceOpponent.anchor.set( 0.5, 0.5 );
-        this.secondChoiceOpponent.x = this.secondChoiceOpponent.width/2 + this.secondChoiceOpponent.width/10;        
+        this.secondChoiceOpponent.x = 152;        
         this.secondChoiceOpponent.y = -40;
         this.secondChoiceOpponent.scale.set( 0.95, 0.95 );
         this.secondChoiceOpponent.visible = false;
@@ -299,8 +299,6 @@ class SelectScreen extends Screen {
             this.background.height = downUI - upUI;
             this.background.width = this.background.height;
 
-            //this.choiceCards.scale.x = 1
-
             this.firstPlayerPresentation.x = 0;
             this.firstPlayerPresentation.y = -242;
             this.secondPlayerPresentation.x = 0;
@@ -330,8 +328,6 @@ class SelectScreen extends Screen {
         } else {
             this.background.width = rightUI - leftUI;
             this.background.height = this.background.width;
-
-            //this.choiceCards.scale.x = 1
 
             this.firstPlayerPresentation.x = leftUI + 160;
             this.firstPlayerPresentation.y = downUI;
