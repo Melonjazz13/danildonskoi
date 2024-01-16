@@ -110,40 +110,62 @@ class FightScreen extends Screen {
     }
 
     initScenario() {
-        let firstAnimatePunch = this.playerSpine.state.addAnimation(1, "punch", false, 0);
+        let startAnimate = this.playerSpine.state.addAnimation(1, "figthidle", false, 0);
+        startAnimate.listener = {
+            complete: () => {
+                gsap.delayedCall( 0.2, () => {
+                    playSound( 'hit', false, 0.5  );                                
+                });
+                gsap.delayedCall( 0.25, () => {
+                    playSound( 'grunt', false, 0.5  );                                
+                });
+            } 
+        }
+        
+        let firstAnimatePunch = this.playerSpine.state.addAnimation(1, "punch", false, 0);        
         firstAnimatePunch.listener = {
             complete: () => {
-                playSound( 'hit', false, 0.6 );
-                playSound( 'grunt', false, 0.5 );
+                gsap.delayedCall( 0.2, () => {
+                    playSound( 'hit', false, 0.5  );                                
+                });
+                gsap.delayedCall( 0.25, () => {
+                    playSound( 'grunt', false, 0.5  );                                
+                });
             } 
         }
         let secondAnimatePunch = this.playerSpine.state.addAnimation(1, "punch", false, 1);
         secondAnimatePunch.listener = {
             complete: () => {
-                playSound( 'hit', false, 0.6 );
-                playSound( 'grunt', false, 0.5 );
+                gsap.delayedCall( 0.2, () => {
+                    playSound( 'hit', false, 0.5  );                                
+                });
+                gsap.delayedCall( 0.25, () => {
+                    playSound( 'damage', false, 0.5  );                                
+                });
             } 
         }
         let animateKick = this.playerSpine.state.addAnimation(1, "kick", false, 1);
         animateKick.listener = {
             complete: () => {
-                playSound( 'hit', false, 0.6 );
-                playSound( 'damage', false, 0.5 );
+                gsap.delayedCall( 1.1, () => {
+                    playSound( 'hit', false, 0.5  );                                
+                });
+                gsap.delayedCall( 1.3, () => {
+                    playSound( 'crash', false, 0.5  );                                
+                });
             } 
         }        
-        let animateSlap = this.playerSpine.state.addAnimation(1, "slap", false, 1);
-        animateSlap.listener = {
-            complete: () => {
-                playSound( 'hit', false, 0.6 );
-                playSound( 'damage', false, 0.5 );
-            } 
-        }
-        let animateIdle =  this.playerSpine.state.addAnimation(1, "figthidle", true, 0);
+        this.playerSpine.state.addAnimation(1, "slap", false, 1);        
+        let animateIdle = this.playerSpine.state.addAnimation(1, "figthidle", true, 0);
         animateIdle.listener = {
             complete: () => {
                 gsap.delayedCall( 0.6, () => {
-                    playSound( 'whScream', false, 0.5  );             
+                    playSound( 'whScream', false, 0.5  );                                
                 });
+                gsap.delayedCall( 0.85, () => {
+                    playSound( 'crash', false, 0.5  );                                
+                });
+                
             } 
         }
         this.playerSpine.state.addAnimation(1, "body_slam", false, 0);       
@@ -159,6 +181,7 @@ class FightScreen extends Screen {
                 });
         }};
 
+        this.enemySpine.state.addAnimation(1, "figthidle", false, 0);
         this.enemySpine.state.addAnimation(1, "block_arm", false, 0);
         this.enemySpine.state.addAnimation(1, "block_arm", false, 1);
         this.enemySpine.state.addAnimation(1, "figthidle", true, 0);
@@ -167,7 +190,7 @@ class FightScreen extends Screen {
         this.enemySpine.state.addAnimation(1, "figthidle", false, 0);
         this.enemySpine.state.addAnimation(1, "defeat_f", false, -1);
         this.enemySpine.state.addAnimation(1, "stand_up_f", false, 1);
-        this.enemySpine.state.addAnimation(1, "body_slam_damage", false, 1);          
+        this.enemySpine.state.addAnimation(1, "body_slam_damage", false, 1);
     }
 
     initFightPresentation() {        
