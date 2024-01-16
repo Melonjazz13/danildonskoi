@@ -87,12 +87,12 @@ class SelectScreen extends Screen {
         this.firstPlayerCard.interactive = true;
         this.firstPlayerCard.on( 'pointertap', this.onCardTap );
         
-        this.secondPlayerCard = new PIXI.Sprite( assets.textures.pixi.mjfCard );
+        this.secondPlayerCard = new PIXI.Sprite( assets.textures.pixi.jonCard );
         this.secondPlayerCard.anchor.set( 0.5, 0.5 );
         this.secondPlayerCard.x = 152;
         this.secondPlayerCard.y = -40;
         this.secondPlayerCard.scale.set( 0.95, 0.95 );
-        this.secondPlayerCard.name = 'MJF';
+        this.secondPlayerCard.name = 'Jon';
         this.secondPlayerCard.interactive = true;
         this.secondPlayerCard.on( 'pointertap', this.onCardTap );
 
@@ -134,7 +134,7 @@ class SelectScreen extends Screen {
         this.firstPlayerPresentation.visible = false;
         this.firstPlayerPresentation.scale.set( 0.82, 0.82 );
 
-        this.secondPlayerPresentation = new PIXI.Sprite( assets.textures.pixi.mjf );
+        this.secondPlayerPresentation = new PIXI.Sprite( assets.textures.pixi.jon );
         this.secondPlayerPresentation.anchor.set( 0.5, 1 );
         this.secondPlayerPresentation.visible = false;
         this.secondPlayerPresentation.scale.set( 0.82, 0.82 );
@@ -241,7 +241,7 @@ class SelectScreen extends Screen {
         this.firstChoicePlayer.scale.set( 0.95, 0.95 );
         this.firstChoicePlayer.visible = false;
 
-        this.secondChoicePlayer = new PIXI.Sprite( assets.textures.pixi.mjfCard );
+        this.secondChoicePlayer = new PIXI.Sprite( assets.textures.pixi.jonCard );
         this.secondChoicePlayer.anchor.set( 0.5, 0.5 );
         this.secondChoicePlayer.x = -152;        
         this.secondChoicePlayer.y = -40;
@@ -382,7 +382,7 @@ class SelectScreen extends Screen {
                 this.secondPlayerCard.off( 'pointertap', this.onCardTap );
                 break;
 
-            case 'MJF':
+            case 'Jon':
                 this.tutorPlayer.hide();
                 setTimeout( this.tutorEnemy.show, 1500 );                 
                 this.selectedWrestless.playerName = event.currentTarget.name;            
@@ -483,7 +483,7 @@ class SelectScreen extends Screen {
                 gsap.from( this.playerCaption.scale, 0.4, {x:0, y:0, ease: "quad.out"} );
                 break;
 
-            case 'MJF':                
+            case 'Jon':                
                 this.secondChoicePlayer.visible = true;
                 this.playerCaption.visible = true;
                 gsap.from( this.secondChoicePlayer, 0.4, {alpha: 0} );

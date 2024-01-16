@@ -116,8 +116,8 @@ class FinishScreen extends Screen {
                 } );
                 break;
 
-            case 'MJF':
-                this.playerSpine.skeleton.setSkinByName('MJF');
+            case 'Jon':
+                this.playerSpine.skeleton.setSkinByName('Jon_Moxley');
                 this.playerSpine.visible = true;
                 this.playerSpine.state.addAnimation(0, 'idle', true);
                 this.playerSpine.state.addAnimation(1, 'win', false, 0);                       

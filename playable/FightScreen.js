@@ -252,9 +252,9 @@ class FightScreen extends Screen {
                 this.selectedWrestless.playerName = object.playerName;
                 break;
 
-            case 'MJF':
+            case 'Jon':
                 this.playerCharacters.visible = true;
-                this.playerSpine.skeleton.setSkinByName('MJF');
+                this.playerSpine.skeleton.setSkinByName('Jon_Moxley');
                 this.playerSpine.state.setAnimation(0, 'figthidle', true);                
                 this.selectedWrestless.playerName = object.playerName;               
                 break;
