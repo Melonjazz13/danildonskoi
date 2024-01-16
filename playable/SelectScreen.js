@@ -421,7 +421,7 @@ class SelectScreen extends Screen {
                     this.showVersusCards();
                     gsap.from( this.firstEnemyPresentation, 0.5, {alpha: 0});             
                 });
-                gsap.delayedCall( 1.8, () => {
+                gsap.delayedCall( 2.5, () => {
                     app.screenManager.set( FightScreen, this.selectedWrestless, true );             
                 })
                 gsap.to( this.contourEnemy, 0.5, { alpha: 0 });
@@ -446,7 +446,7 @@ class SelectScreen extends Screen {
                     this.showVersusCards();
                     gsap.from( this.secondEnemyPresentation, 0.5, {alpha: 0});             
                 });
-                gsap.delayedCall( 1.8, () => {
+                gsap.delayedCall( 2.5, () => {
                     app.screenManager.set( FightScreen, this.selectedWrestless, true );             
                 })
                 gsap.to( this.contourEnemy, 0.5, { alpha: 0 });
