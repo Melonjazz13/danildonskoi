@@ -381,8 +381,8 @@ class FightScreen extends Screen {
     }
 
     showFightPresentation() {
-        playSound( 'countdown', false, 0.5 );
         gsap.from( this.fightCaptionHorizon, 0.65, {alpha: 0, repeat: 5, yoyo: true, ease: "quad.inOut", onComplete: ()=>{
+            playSound( 'countdown', false, 0.9 );
             this.initScenario();
         }
     });
