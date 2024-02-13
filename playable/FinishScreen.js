@@ -12,7 +12,8 @@ class FinishScreen extends Screen {
 
     constructor() {
         super();
-        this.initScreen();        
+        this.initScreen();    
+
         app.resizes.add( this.onResize );
         
     }
@@ -21,7 +22,7 @@ class FinishScreen extends Screen {
         this.display = new PIXI.Container();
         
         this.initSpine();
-        this.initScene();    
+        this.initScene();
     }
 
     initScene() {
@@ -64,7 +65,7 @@ class FinishScreen extends Screen {
         this.display.addChild( this.downloadBtn );
         this.downloadBtn.anchor.set( 0.5, 0.5 );	
         this.downloadBtn.interactive = true;
-        this.downloadBtn.on( 'pointertap', clickAd );        	
+        this.downloadBtn.on( 'pointertap', clickAd );   
     } 
 
     initSpine() {
@@ -113,7 +114,8 @@ class FinishScreen extends Screen {
                     this.speechCaption.visible = true;
                     gsap.from( this.speechCaption, 1, {alpha: 0, ease: "back.out"});
                     gsap.from( this.speechCaption.scale, 0.7, {x:0, y:0, ease: "back.out"} );
-                } );
+                } );              
+                appEndGame();
                 break;
 
             case 'Jon':
@@ -133,6 +135,7 @@ class FinishScreen extends Screen {
                     gsap.from( this.speechCaption, 1, {alpha: 0, ease: "back.out"});
                     gsap.from( this.speechCaption.scale, 0.7, {x:0, y:0, ease: "back.out"} );
                 } );
+                appEndGame();
                 break;
         }
     }

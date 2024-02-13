@@ -110,7 +110,7 @@ class FightScreen extends Screen {
     }
 
     initScenario() {
-        let startAnimate = this.playerSpine.state.addAnimation(1, "figthidle", false, 0);
+        let startAnimate = this.playerSpine.state.addAnimation(1, "figthidle" , false, 0);
         startAnimate.listener = {
             complete: () => {
                 gsap.delayedCall( 0.2, () => {

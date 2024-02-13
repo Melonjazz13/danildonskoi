@@ -13,7 +13,7 @@ class Tutor {
         this.initDisplay();
     }
 
-    initDisplay( ) {
+    initDisplay() {
         this.display = new PIXI.Container();
         this.display.visible = false;
 
